@@ -2,9 +2,13 @@
     color: black;
 }
 
+/* Similar CSS Properties */
+body, .container, .headerContainer, .displayContainer, .btnContainer, .btnContainer div {
+    display: flex;
+}
+
 body {
     background-color: blanchedalmond;
-    display: flex;
     margin-top: 22vh;
     justify-content: center;
 }
@@ -13,8 +17,13 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
+hr {
+    border: solid 1px floralwhite;
+    width: 95%;
+    margin: 2px auto;
+}
+
 .container {
-    display: flex;
     flex-direction: column;
     width: 350px;
     height: 500px;
@@ -24,15 +33,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .headerContainer {
-    display: flex;
     flex-direction: row;
-    margin: 5px 10px;
+    margin: 6px 18px;
 }
 
 .headerContainer h1 {
     font-size: 26px;
-    color: cornsilk;
-    text-shadow: -1px -1px 3px black;
+    color: floralwhite;
+    text-shadow: 1px 1px 3px black;
 }
 
 .headerContainer button {
@@ -58,11 +66,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .displayContainer {
-    display: flex;
     flex-direction: column;
     align-items: end;
     margin: 10px 20px;
     overflow: hidden;
+    border: solid 2px floralwhite;
+    border-radius: 10px;
+    padding: 2px 5px;
 }
 
 .displayContainer label:nth-child(1) {
@@ -80,12 +90,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .btnContainer {
     margin: 10px 20px;
-    display: flex;
     flex-direction: column;
 }
 
 .btnContainer div {
-    display: flex;
     flex-direction: row;
     flex: 1;
 }
@@ -94,4 +102,12 @@ h1, h2, h3, h4, h5, h6 {
     flex: 1;
     padding: 22px;
     font-size: 20px;
+    border-radius: 10px;
+    background-color: floralwhite;
+    font-weight: bold;
+}
+
+.btnContainer button:disabled {
+    background-color: gainsboro;
+    color: lightslategrey;
 }

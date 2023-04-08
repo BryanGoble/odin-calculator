@@ -135,6 +135,8 @@ buttons.forEach((btn) => {
         if (btnValue == '=') {
             if (oper == null) {
                 alert ('Please choose a valid operator!');
+            } else if (display.textContent == 0) {
+                alert("\nTo Infinity and Beyond!\n\nNice try, Space Pirate. You know we can't divide by 0!");
             } else {
                 num2 = display.textContent;
                 miniDisplay.textContent = miniDisplay.textContent + " " + display.textContent;
@@ -163,7 +165,6 @@ buttons.forEach((btn) => {
             miniDisplay.textContent = "";
             display.textContent = 0;
         } else if (btnValue == '.') {
-            // This is the decimal button functionality
             switch (reset) {
                 case (true):
                     display.textContent = 0;
