@@ -22,15 +22,20 @@ function division(num1, num2) {
 // Update display and variables after solve
 function updateDisplay(answer) {
     display.textContent = answer;
+    reset = true;
     num1 = answer;
-    //oper = null;
+    num2 = null;
+    point = false;
 }
 
 // Variables
 let oper;
 let num1;
 let num2;
+let equals;
 let numScreen;
+let reset;
+let point;
 
 // Functions of the Calculator
 function operate(oper, num1, num2) {
@@ -87,19 +92,25 @@ buttons.forEach((btn) => {
 
     const btnValue = btn.getAttribute('value');
     btn.addEventListener('click', () => {
-        //const text = btn.innerText;
+
         for (const value in numArr) {
             if (btnValue == value) {
                 switch (true) {
                     case (num1 !== null):
                         enableOper();
                     case (num1 == null):
-                        if (display.textContent == 0) {
-                            display.textContent = btnValue;
-                            break;
-                        } else {
-                            display.append(btnValue);
-                            break;
+                        switch (reset) {
+                            case (true):
+                                display.textContent = 0;
+                                reset = false;
+                            default:
+                                if (display.textContent == '0') {
+                                    display.textContent = btnValue;
+                                    break;
+                                } else {
+                                    display.append(btnValue);
+                                    break;
+                                };
                         };
                 }
             }
@@ -114,17 +125,23 @@ buttons.forEach((btn) => {
                     disableOper();
                 } else {
                     num2 = display.textContent;
-                    miniDisplay.textContent = miniDisplay.textContent + " " + oper;
+                    miniDisplay.textContent = miniDisplay.textContent + " " + display.textContent + " " + oper;
                     operate(oper, num1, num2);
                     oper = btnValue;
+                    disableOper();
                 }
             }
         };
         if (btnValue == '=') {
-            num2 = display.textContent;
-            miniDisplay.textContent = miniDisplay.textContent + " " + display.textContent;
-            display.textContent = 0;
-            operate(oper, num1, num2);
+            if (oper == null) {
+                alert ('Please choose a valid operator!');
+            } else {
+                num2 = display.textContent;
+                miniDisplay.textContent = miniDisplay.textContent + " " + display.textContent;
+                display.textContent = 0;
+                operate(oper, num1, num2);
+                oper = null;
+            }
         } else if (btnValue == '<-') {
             if (display.textContent == 0) {
                 return;
@@ -136,7 +153,37 @@ buttons.forEach((btn) => {
                     return;
                 };
             };
-        };
+        } else if (btnValue == 'C') {
+            num1 = null;
+            num2 = null;
+            oper = null;
+            reset = false;
+            point = false;
+            enableOper();
+            miniDisplay.textContent = "";
+            display.textContent = 0;
+        } else if (btnValue == '.') {
+            // This is the decimal button functionality
+            switch (reset) {
+                case (true):
+                    display.textContent = 0;
+                    reset = false;
+                default:
+                    switch (point) {
+                        case (true):
+                            break;
+                        default:
+                            if (display.textContent == '0') {
+                                display.textContent = 0 + btnValue;
+                                break;
+                            } else {
+                                display.append(btnValue);
+                                break;
+                            };
+                    }
+            };
+            point = true;
+        }
         // Use to cleanup code later
         // if (btnValue in numArr) {
         //     if (display.textContent == 0) {
